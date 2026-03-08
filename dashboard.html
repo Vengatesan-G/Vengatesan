@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body style="opacity: 0; transition: opacity 0.5s ease; background-image: radial-gradient(circle at 15% 50%, rgba(16, 185, 129, 0.15), transparent 25%), radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.15), transparent 25%);">
+    
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header animate-fade-in">
+            <div>
+                <h1 style="font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-chart-pie" style="color: var(--accent-color);"></i>
+                    ExpenseTracker
+                </h1>
+            </div>
+            
+            <div class="user-profile">
+                <div style="text-align: right;">
+                    <p style="font-size: 0.8rem; font-weight: 500; text-transform: uppercase;">Welcome back,</p>
+                    <h3 id="userNameDisplay">User</h3>
+                </div>
+                <div class="avatar">
+                    <span id="userInitial">U</span>
+                </div>
+                <button id="logoutBtn" class="btn-icon" title="Logout" style="margin-left: 0.5rem; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--surface-border);">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Summary Cards -->
+        <section class="summary-grid">
+            <div class="glass-container summary-card card-balance animate-fade-in" style="animation-delay: 0.1s;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h3 class="summary-title">Total Balance</h3>
+                        <div class="summary-amount"><span style="font-size: 1.5rem;">$</span><span id="balanceAmount" style="color: inherit; font-size: inherit;">0.00</span></div>
+                    </div>
+                    <div class="btn-icon" style="background: rgba(99, 102, 241, 0.1); color: var(--accent-color); font-size: 1.25rem;">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-container summary-card card-income animate-fade-in" style="animation-delay: 0.2s;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h3 class="summary-title">Total Income</h3>
+                        <div class="summary-amount">
+                            <span style="font-size: 1.5rem;">$</span><span id="incomeAmount" style="color: inherit; font-size: inherit;">0.00</span>
+                        </div>
+                    </div>
+                    <div class="btn-icon" style="background: var(--success-bg); color: var(--success-color); font-size: 1.25rem;">
+                        <i class="fa-solid fa-arrow-trend-up"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-container summary-card card-expense animate-fade-in" style="animation-delay: 0.3s;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <h3 class="summary-title">Total Expenses</h3>
+                        <div class="summary-amount">
+                            <span style="font-size: 1.5rem;">$</span><span id="expenseAmount" style="color: inherit; font-size: inherit;">0.00</span>
+                        </div>
+                    </div>
+                    <div class="btn-icon" style="background: var(--danger-bg); color: var(--danger-color); font-size: 1.25rem;">
+                        <i class="fa-solid fa-arrow-trend-down"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Content -->
+        <div class="dashboard-grid">
+            <!-- Form Section -->
+            <section class="glass-container form-card animate-fade-in" style="animation-delay: 0.4s;">
+                <h3 class="card-title">Add Transaction</h3>
+                
+                <form id="transactionForm">
+                    <div class="radio-group">
+                        <div class="radio-btn">
+                            <input type="radio" id="typeExpense" name="type" value="expense" checked>
+                            <label class="radio-label" for="typeExpense">
+                                <i class="fa-solid fa-minus" style="margin-right: 0.5rem;"></i> Expense
+                            </label>
+                        </div>
+                        <div class="radio-btn">
+                            <input type="radio" id="typeIncome" name="type" value="income">
+                            <label class="radio-label" for="typeIncome">
+                                <i class="fa-solid fa-plus" style="margin-right: 0.5rem;"></i> Income
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="text">Transaction Name</label>
+                        <input type="text" id="text" class="form-control" placeholder="e.g. Salary, Groceries, Rent..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="amount">Amount ($)</label>
+                        <input type="number" id="amount" class="form-control" placeholder="0.00" step="0.01" min="0.01" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Add Transaction <i class="fa-solid fa-plus"></i>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Transactions List -->
+            <section class="glass-container transactions-card animate-fade-in" style="animation-delay: 0.5s;">
+                <div class="transactions-header">
+                    <h3 class="card-title" style="margin-bottom: 0; border: none; padding: 0;">Recent Transactions</h3>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary);" id="transactionCount">0 items</span>
+                </div>
+                
+                <div id="list" class="transactions-list">
+                    <!-- Transactions dynamically added here -->
+                    <div class="empty-state">
+                        <i class="fa-solid fa-receipt"></i>
+                        <p>No transactions found.</p>
+                        <p style="font-size: 0.85rem; margin-top: 0.5rem;">Add a new income or expense to get started.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
